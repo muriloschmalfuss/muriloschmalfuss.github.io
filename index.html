@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Murilo Schmalfuss — Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #22263a;
+      --accent: #6c63ff;
+      --accent2: #a78bfa;
+      --text: #e2e8f0;
+      --muted: #8892a4;
+      --border: #2d3352;
+      --radius: 14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── HEADER / HERO ── */
+    header {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: radial-gradient(ellipse at 50% 0%, #2a2060 0%, var(--bg) 70%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(108,99,255,.15) 0%, transparent 70%);
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 0 4px rgba(108,99,255,.3);
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #fff 30%, var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    header .role {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-top: .5rem;
+      font-weight: 400;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+
+    .badge {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: .3rem .85rem;
+      font-size: .8rem;
+      color: var(--accent2);
+      font-weight: 500;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .4rem;
+      color: var(--muted);
+      font-size: .75rem;
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-hint svg { opacity: .6; }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+    }
+
+    .section-label {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: .72rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: .6rem;
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.4rem;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(108,99,255,.25);
+    }
+
+    .timeline-degree {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .timeline-institution {
+      font-size: .9rem;
+      color: var(--accent2);
+      margin-top: .2rem;
+    }
+
+    .timeline-detail {
+      font-size: .83rem;
+      color: var(--muted);
+      margin-top: .2rem;
+    }
+
+    /* ── PORTFOLIO GRID ── */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(108,99,255,.18);
+      border-color: var(--accent);
+    }
+
+    .card-thumb {
+      width: 100%;
+      height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+    }
+
+    .card-thumb.folium {
+      background: linear-gradient(135deg, #1a2e22, #2d5a3d);
+    }
+
+    .card-thumb.poker {
+      background: linear-gradient(135deg, #1e1a2e, #3d2d5a);
+    }
+
+    .card-body {
+      padding: 1.25rem 1.4rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: .4rem;
+    }
+
+    .card-desc {
+      font-size: .87rem;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      font-size: .72rem;
+      font-weight: 500;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: .2rem .65rem;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      margin-top: 1.2rem;
+      font-size: .84rem;
+      font-weight: 500;
+      color: var(--accent2);
+      text-decoration: none;
+      transition: color .15s;
+    }
+
+    .card-link:hover { color: #fff; }
+
+    .card-link svg { flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: .82rem;
+      color: var(--muted);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .portfolio-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header>
+    <div class="avatar">MS</div>
+    <h1>Murilo Schmalfuss</h1>
+    <p class="role">Software Engineer &amp; Tech Lead</p>
+    <div class="badge-row">
+      <span class="badge">Backend</span>
+      <span class="badge">Frontend</span>
+      <span class="badge">Agile</span>
+      <span class="badge">Cloud</span>
+    </div>
+    <div class="scroll-hint">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      scroll
+    </div>
+  </header>
+
+  <!-- FORMAÇÃO -->
+  <section id="education">
+    <p class="section-label">Formação Acadêmica</p>
+    <h2>Educação</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-degree">Graduação em Ciência da Computação</div>
+        <div class="timeline-institution">Universidade Federal de Pelotas — UFPel</div>
+        <div class="timeline-detail">Bacharel · Pelotas, RS</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-degree">Mestrado em Computação</div>
+        <div class="timeline-institution">Universidade de Pelotas — UCPel</div>
+        <div class="timeline-detail">Pós-graduação Stricto Sensu · Pelotas, RS</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-degree">MBA em Gestão de Projetos e Metodologias Ágeis</div>
+        <div class="timeline-institution">Pontifícia Universidade Católica do Rio Grande do Sul — PUC-RS</div>
+        <div class="timeline-detail">MBA · Porto Alegre, RS</div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- PORTFÓLIO -->
+  <section id="portfolio">
+    <p class="section-label">Projetos</p>
+    <h2>Portfólio</h2>
+    <div class="portfolio-grid">
+
+      <!-- Folium -->
+      <div class="card">
+        <div class="card-thumb folium">🌿</div>
+        <div class="card-body">
+          <div class="card-title">Folium</div>
+          <div class="card-desc">
+            Aplicação web para organização e anotações, com interface limpa e focada na produtividade.
+          </div>
+          <div class="card-tags">
+            <span class="tag">Web App</span>
+            <span class="tag">Firebase</span>
+            <span class="tag">Produtividade</span>
+          </div>
+          <a class="card-link" href="https://folium.web.app/" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Acessar aplicação
+          </a>
+        </div>
+      </div>
+
+      <!-- Agile Planning Poker -->
+      <div class="card">
+        <div class="card-thumb poker">🃏</div>
+        <div class="card-body">
+          <div class="card-title">Agile Planning Poker</div>
+          <div class="card-desc">
+            Ferramenta de estimativa colaborativa para times ágeis. Permite votação em tempo real usando Planning Poker.
+          </div>
+          <div class="card-tags">
+            <span class="tag">Web App</span>
+            <span class="tag">Firebase</span>
+            <span class="tag">Scrum</span>
+            <span class="tag">Real-time</span>
+          </div>
+          <a class="card-link" href="https://agileplanningpoker.web.app/" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Acessar aplicação
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Murilo Schmalfuss · murilo.schmalfuss@gmail.com</p>
+  </footer>
+
+</body>
+</html>
